@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    {% block stylesheet %}
+      <link rel="stylesheet" href="static/home.css"></head>
+    {% endblock %}
+<body>
+        {% block content %}
+        <div class="container-fluid d-flex justify-content-center">
+          <img src="/static/images/presentation.png" class="illustration d-none d-md-block" alt="">
+          <div class="d-flex align-items-center">
+            <div class="d-flex flex-column side-text">
+              <h1 class="text-center home-heading">Discover the beauty of budgeting</h1>
+              <p class="text-center subheading">Keep track of your payments, investments, stocks, and bills with our interactive services.</p>
+              <form class="my-3 mx-auto" action="{{url_for('register')}}">
+                <button class=" btn btn-md btn-success btn-rounded sign-up">Sign up for free</button>
+              </form>                
+            </div>
+          </div>
+        </div>
+
+      <div class="container-fluid d-flex justify-content-center my-4 my-md-5">
+        <div class="d-flex align-items-center">
+          <div class="d-flex flex-column side-text">
+            <h1 class="text-center home-heading">Create a payoff plan</h1>
+              <p class="text-center subheading">Gain insights with our services and never miss a payment</p>
+              <form class="my-3 mx-auto" action="{{url_for('register')}}">
+                <button class=" btn btn-md btn-success btn-rounded sign-up">Sign up for free</button>
+              </form>            
+          </div>
+        </div>
+        <img src="/static/images/office.png" class="illustration d-none d-md-block" alt="">
+      </div>
+
+      <div class="container-fluid d-flex justify-content-center my-4 my-md-5">
+        <img src="/static/images/vacation.png" class="illustration d-none d-md-block" alt="">
+        <div class="d-flex align-items-center">
+            <div class="d-flex flex-column side-text">
+                <h1 class="text-center home-heading">Thinking of that dream vacation?</h1>
+                <p class="text-center subheading">Find out how you can improve your savings and make your dreams come true.</p>
+                <form class="my-3 mx-auto" action="{{url_for('register')}}">
+                  <button class=" btn btn-md btn-success btn-rounded sign-up">Sign up for free</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+        <!-- <a href="{{url_for('login')}}">Login Page</a><hr>
+        <a href="{{url_for('register')}}">Register Page</a><hr> -->
+
+
+
+
+
+    {% block footer %}
+    {% endblock %}
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const navbarToggle = document.querySelector('.navbar-toggler');
+        const navbar = document.querySelector('.navbar');
+        const navbar_clicked = document.querySelector('.navbar-clicked');
+
+        // console.log("hello world")
+        // navbarToggle.addEventListener('click', function () {
+        //   const color = window.getComputedStyle(navbar).getPropertyValue('background-color');
+        //   console.log(color);
+        //   navbar.style.backgroundColor = "rgb(92, 222, 211)";
+        //   navbar_clicked.style.backgroundColor = "rgb(92, 222, 211)";
+        //   navbar.classList.toggle('navbar-clicked');
+        // });
+      });
+      </script>
+  </body>
+</html>

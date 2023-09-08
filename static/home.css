@@ -1,0 +1,87 @@
+.img-fluid-custom {
+    max-width: 150px;
+    height: auto;
+    padding: 0;
+}
+.illustration {
+    max-width: 50%;
+}
+.navbar {
+    height: 130px;
+}
+.navbar-clicked, .navbar {
+    background-color: rgb(92, 222, 211);
+}
+@media (max-width: 1200px) {
+    .navbar-brand {
+        text-align: center; /* Center the logo */
+        margin: auto;
+        display: block;
+    }
+}
+.nav-link, .subheading {
+    font-size: 1.1em;
+}
+@media (width < 1200px) {
+    /* .nav-item {
+        width: 40%;
+    } */
+    .dropdown-menu {
+        width: 60%;
+    }
+}
+.nav-link:hover {
+    color: black;
+    font-weight: bold;
+}
+body {
+    background-color: rgb(241,254,253);
+}
+.subheading {
+    font-family: 'Nunito Sans';
+}
+@media (width < 760px) {
+    .side-text {
+        width: 100%;
+        /* min-width: 100%; */
+        text-align: center;
+    }
+}
+@media (width >= 760px) {
+    .side-text {
+        width: 80%;
+        /* min-width: 100%; */
+        text-align: center;
+    }
+}
+.sign-up {
+    /* width: 39%; */
+    background-color: #3c8c85;
+}
+.home-heading {
+    font-family: 'Roboto';
+    font-weight: 700;
+}
+ul li:hover > ul,
+ul li:focus-within > ul,
+ul li ul:hover,
+ul li ul:focus {
+  visibility: visible;
+  opacity: 1;
+  display: block
+}
+
+ul li ul li {
+  clear: both;
+  width: 100%;
+}
+.nav-button {
+    background-color: white;
+    border-color: black;
+    border-width: 2px;
+}
+.nav-button:hover {
+    background-color: #f3f3f3;
+    border-color: black;
+    border-width: 2px;
+}
