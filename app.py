@@ -7,13 +7,28 @@ from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
 from how_it_works import how_it_works
 from budget_uni import budget_uni_bp
+from dotenv import load_dotenv
+import os
+
+def configure():
+    load_dotenv()
+
+def getUser():
+    configure()
+    return str(os.getenv('user'))
+
+def getPasswd():
+    configure()
+    return str(os.getenv('passwd'))
+
 
 app = Flask(__name__)
 app.register_blueprint(how_it_works)
 app.register_blueprint(budget_uni_bp)
 #Add Database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:="**************",@localhost/our_users'
-#Secret Key
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{getUser()}:{getPasswd()}@localhost/our_users'
+
+# #Secret Key
 app.config['SECRET_KEY'] = 'secret key'
 #Initialize Database
 db = SQLAlchemy(app)
