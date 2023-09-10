@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block title %}Info{% endblock%}
+{% block stylesheet %}
+    <!-- <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/> -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
+  rel="stylesheet"
+/>
+<link rel="stylesheet" href="static/currency_converter.css">
+<!-- <script type="text/javascript" src="js_scripts/currency_converter.js"></script> -->
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="text-left">
+            <h1 class="header-text">Currency Converter</h1>
+        </div>
+        <div>
+        <div class="convert_from_div m-auto p-5 ">
+            <div class="vLqKYe egcvbb q0WxUd">
+                <input class="lWzCpb ZEB7Fb" value="1" id="currency_val_from" aria-label="Currency Amount Field" type="number">
+                    <div class="select_from_div">
+                        <select class="select_from text-center" id="currency_type_from" aria-label="Currency Type">
+                            <option value="ARS">Argentine Peso</option>
+                            <option value="AUD">Australian Dollar</option>
+                            <option value="CAD">Canadian Dollar</option>
+                            <option value="EUR">Euro</option>
+                            <option value="INR">Indian Rupee</option>
+                            <option value="MXN">Mexican Peso</option>
+                            <option selected value="USD">US Dollar</option>
+                            <option value="CNY">Yuan Renminbi</option>
+                        </select>
+                            <!-- <span class="sBsFoc" aria-hidden="true">United States Dollar</span> -->
+                    </div>
+            </div>
+        </div>
+
+        <div class="convert_from_div m-auto p-5 pt-1">
+            <div class="vLqKYe egcvbb q0WxUd">
+                <input class="lWzCpb ZEB7Fb" id="currency_val_to" aria-label="Currency Amount Field" type="number">
+                    <div class="select_from_div">
+                        <select class="select_from text-center"  id="currency_type_to" aria-label="Currency Type">
+                            <option value="CAD">Canadian Dollar</option>
+                            <option value="CNY">Yuan Renminbi</option>
+                            <option selected value="EUR">Euro</option>
+                            <option value="MXN">Mexican Peso</option>
+                            <option value="USD">US Dollar</option>
+                        </select>
+                            <!-- <span class="sBsFoc" aria-hidden="true">United States Dollar</span> -->
+                    </div>
+                </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+
+        // let val = document.getElementById("currency_val_from").value;
+        let currency_val_from = document.getElementById("currency_val_from").value;
+        let currency_type_from = document.getElementById("currency_type_from").value;
+
+        let currency_val_to = document.getElementById("currency_val_to");
+        let currency_type_to = document.getElementById("currency_type_to");
+
+        let requestURL = "https://api.exchangerate.host/convert?from=USD&to=EUR"; 
+            let request = new XMLHttpRequest(); 
+            request.open('GET', requestURL);
+            request.responseType = 'json';
+            request.send();
+            request.onload = function() {
+                var response = request.response;
+                console.log(response);
+                currency_val_to.value = Math.round(currency_val_from*response.info.rate*100)/100;
+            }
+        document.getElementById('currency_val_from').addEventListener('change', function() {
+            currency_val_from = this.value;
+
+            requestURL = "https://api.exchangerate.host/convert?from=" + currency_type_from + "&to=" + currency_type_to.value; 
+            request = new XMLHttpRequest(); 
+            request.open('GET', requestURL);
+            request.responseType = 'json';
+            request.send();
+
+            request.onload = function() {
+            let response = request.response;
+            const rate = response.info.rate;
+            currency_val_to.value = Math.round(currency_val_from*response.info.rate*100)/100;
+            }
+        });
+        document.getElementById('currency_type_from').addEventListener('change', function() {
+            currency_type_from = this.value;
+            requestURL = "https://api.exchangerate.host/convert?from=" + currency_type_from + "&to=" + currency_type_to.value; 
+            request = new XMLHttpRequest(); 
+            request.open('GET', requestURL);
+            request.responseType = 'json';
+            request.send();
+
+            request.onload = function() {
+            let response = request.response;
+            const rate = response.info.rate;
+            currency_val_to.value = Math.round(currency_val_from*response.info.rate*100)/100;
+            }
+        });
+
+
+        // console.log(val);
+    </script>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

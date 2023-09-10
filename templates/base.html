@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz@6..12&family=Open+Sans&family=Poppins&family=Roboto&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="static/base.css">
   {% block stylesheet %}{% endblock %}
+  <link rel="stylesheet" href="static/base.css">
 </head>
 <body>
   <nav class="navbar navbar-expand-xl bg-body-tertiary mb-5" >
@@ -35,15 +35,15 @@
           </ul>
         </li>
         <li class="nav-item mx-3"><a class="nav-link text-dark" href="{{url_for('budget_uni.budget_uni')}}">Budget University</a></li>
-        <li class="nav-item mx-3"><a class="nav-link text-dark" href="#">Stocks</a></li>
+        <li class="nav-item mx-3"><a class="nav-link text-dark" href="{{url_for('stocks.stocks')}}">Stocks</a></li>
         <li class="nav-item dropdown mx-3">
           <a class="nav-link text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Resources
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Home Affordability Calculator</a></li>
-            <li><a class="dropdown-item" href="#">Loan Repayment Calculator</a></li>
-            <li><a class="dropdown-item" href="#">Currency Converter</a></li>
+            <li><a class="dropdown-item" href="{{url_for('resources.home_aff_calc')}}">Home Affordability Calculator</a></li>
+            <li><a class="dropdown-item" href="{{url_for('resources.loan_repay_calc')}}">Loan Repayment Calculator</a></li>
+            <li><a class="dropdown-item" href="{{url_for('resources.currency_converter')}}">Currency Converter</a></li>
           </ul>
         </li>
         <li class="nav-item mx-3"><a class="nav-link text-dark" href="#">Mr. Salary</a></li>

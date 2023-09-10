@@ -5,8 +5,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
-from how_it_works import how_it_works
-from budget_uni import budget_uni_bp
+from nav_links import how_it_works, budget_uni_bp, stocks_bp, resources_bp
 from dotenv import load_dotenv
 import os
 
@@ -21,10 +20,11 @@ def getPasswd():
     configure()
     return str(os.getenv('passwd'))
 
-
 app = Flask(__name__)
 app.register_blueprint(how_it_works)
 app.register_blueprint(budget_uni_bp)
+app.register_blueprint(stocks_bp)
+app.register_blueprint(resources_bp)
 #Add Database
 app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{getUser()}:{getPasswd()}@localhost/our_users'
 
