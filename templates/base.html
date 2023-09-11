@@ -8,7 +8,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz@6..12&family=Open+Sans&family=Poppins&family=Roboto&display=swap" rel="stylesheet">
+  <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
+  rel="stylesheet"
+/>
   {% block stylesheet %}{% endblock %}
+  
   <link rel="stylesheet" href="static/base.css">
 </head>
 <body>
@@ -51,11 +56,11 @@
     <!-- </div> -->
     <div class="d-flex flex-row ps-xl-5 py-4 py-xl-0">
       <form class="" action="{{url_for('register')}}">
-        <button class=" mx-1 p-2 px-md-3 btn btn-md btn-rounded nav-button">Sign up</button>
+        <button class=" mx-1 p-2 px-md-3 btn btn-lg btn-rounded nav-button">Sign up</button>
       </form>
       <form class="" action="{{url_for('login')}}">
         
-        <button class=" mx-1 p-2 px-md-3 btn btn-md btn-rounded nav-button">
+        <button class=" mx-1 p-2 px-md-3 btn btn-lg btn-rounded nav-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unlock-fill" viewBox="0 0 16 16" id="lock">
             <path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z"/>
           </svg>

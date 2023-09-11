@@ -9,61 +9,122 @@
   href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
   rel="stylesheet"
 /> -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
-  rel="stylesheet"
-/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-flags.min.css">
 <link rel="stylesheet" href="static/currency_converter.css">
+<link rel="stylesheet" href="static/base.css">
+
 <!-- <script type="text/javascript" src="js_scripts/currency_converter.js"></script> -->
 {% endblock %}
 {% block content %}
-    <div class="container-fluid">
-        <div class="text-left">
+    <div class="container-fluid pt-3">
+        <div class="text-center m-auto">
             <h1 class="header-text">Currency Converter</h1>
-        </div>
-        <div>
-        <div class="convert_from_div m-auto p-5 ">
-            <div class="vLqKYe egcvbb q0WxUd">
+            <p class="pt-2 description">Over 20 different currencies to choose from, with a real time exchange rate</p>
+            <div>
+                <span class="flag flag-sm flag-country-ar"></span>
+                <span class="flag flag-sm flag-country-au"></span>
+                <span class="flag flag-sm flag-country-br"></span>
+                <span class="flag flag-sm flag-country-ca"></span>
+                <span class="flag flag-sm flag-country-cl"></span>
+                <span class="flag flag-sm flag-country-co"></span>
+                <span class="flag flag-sm flag-country-cr"></span>
+                <span class="flag flag-sm flag-country-eg"></span>
+                <span class="flag flag-sm flag-country-eu"></span>
+                <span class="flag flag-sm flag-country-in"></span>
+                <span class="flag flag-sm flag-country-jo"></span>
+                <span class="flag flag-sm flag-country-kr"></span>
+                <span class="flag flag-sm flag-country-lb"></span>
+                <span class="flag flag-sm flag-country-mx"></span>
+                <span class="flag flag-sm flag-country-ng"></span>
+                <span class="flag flag-sm flag-country-qa"></span>
+                <span class="flag flag-sm flag-country-us"></span>
+                <span class="flag flag-sm flag-country-jp"></span>
+                <span class="flag flag-sm flag-country-cn"></span>
+            </div>
+
+            <!-- <div class="convert_from_div m-auto">
                 <input class="lWzCpb ZEB7Fb" value="1" id="currency_val_from" aria-label="Currency Amount Field" type="number">
+                <div class="select_from_div">
+                    <select class="select_from text-center" id="currency_type_from" aria-label="Currency Type">
+                        <option value="ARS">Argentine Peso</option>
+                        <option value="AUD">Australian Dollar</option>
+                        <option value="CAD">Canadian Dollar</option>
+                        <option value="EUR">Euro</option>
+                        <option value="INR">Indian Rupee</option>
+                        <option value="MXN">Mexican Peso</option>
+                        <option selected value="USD">US Dollar</option>
+                        <option value="CNY">Yuan Renminbi</option>
+                    </select>
+                </div>
+            </div> -->
+        </div>
+        <div class="convert_from_div m-auto p-5 ">
+            <div class="currency_box">
+                <input class="currency_input currency" value="1" id="currency_val_from" aria-label="Currency Amount Field" type="number">
                     <div class="select_from_div">
-                        <select class="select_from text-center" id="currency_type_from" aria-label="Currency Type">
+                        <select class="select_from text-center currency" id="currency_type_from" aria-label="Currency Type">
                             <option value="ARS">Argentine Peso</option>
                             <option value="AUD">Australian Dollar</option>
+                            <option value="BRL">Brazilian Real</option>
                             <option value="CAD">Canadian Dollar</option>
+                            <option value="CLP">Chilean Peso</option>
+                            <option value="COP">Colombian Peso</option>
+                            <option value="CRC">Costa Rican Colon</option>
+                            <option value="DKK">Danish Krone</option>
+                            <option value="EGP">Egyptian Pound</option>
                             <option value="EUR">Euro</option>
                             <option value="INR">Indian Rupee</option>
+                            <option value="JOD">Jordanian Dinar</option>
+                            <option value="KRW">Korean Won</option>
+                            <option value="LBP">Lebanese Pound</option>
                             <option value="MXN">Mexican Peso</option>
+                            <option value="NGN">Nigerian Naira</option>
+                            <option value="QAR">Qatari Rial</option>
                             <option selected value="USD">US Dollar</option>
+                            <option value="JPY">Yen</option>
                             <option value="CNY">Yuan Renminbi</option>
                         </select>
-                            <!-- <span class="sBsFoc" aria-hidden="true">United States Dollar</span> -->
                     </div>
             </div>
         </div>
 
         <div class="convert_from_div m-auto p-5 pt-1">
-            <div class="vLqKYe egcvbb q0WxUd">
-                <input class="lWzCpb ZEB7Fb" id="currency_val_to" aria-label="Currency Amount Field" type="number">
+            <div class="currency_box">
+                <input class="currency_input" id="currency_val_to" aria-label="Currency Amount Field" type="number">
                     <div class="select_from_div">
-                        <select class="select_from text-center"  id="currency_type_to" aria-label="Currency Type">
+                        <select class="select_from text-center currency"  id="currency_type_to" aria-label="Currency Type">
+                            <option value="ARS">Argentine Peso</option>
+                            <option value="AUD">Australian Dollar</option>
+                            <option value="BRL">Brazilian Real</option>
                             <option value="CAD">Canadian Dollar</option>
-                            <option value="CNY">Yuan Renminbi</option>
+                            <option value="CLP">Chilean Peso</option>
+                            <option value="COP">Colombian Peso</option>
+                            <option value="CRC">Costa Rican Colon</option>
+                            <option value="DKK">Danish Krone</option>
+                            <option value="EGP">Egyptian Pound</option>
                             <option selected value="EUR">Euro</option>
+                            <option value="INR">Indian Rupee</option>
+                            <option value="JOD">Jordanian Dinar</option>
+                            <option value="KRW">Korean Won</option>
+                            <option value="LBP">Lebanese Pound</option>
                             <option value="MXN">Mexican Peso</option>
+                            <option value="NGN">Nigerian Naira</option>
+                            <option value="QAR">Qatari Rial</option>
                             <option value="USD">US Dollar</option>
+                            <option value="JPY">Yen</option>
+                            <option value="CNY">Yuan Renminbi</option>
                         </select>
-                            <!-- <span class="sBsFoc" aria-hidden="true">United States Dollar</span> -->
                     </div>
                 </div>
         </div>
     </div>
-    </div>
+        
 
     <script>
 
         // let val = document.getElementById("currency_val_from").value;
-        let currency_val_from = document.getElementById("currency_val_from").value;
-        let currency_type_from = document.getElementById("currency_type_from").value;
+        let currency_val_from = document.getElementById("currency_val_from");
+        let currency_type_from = document.getElementById("currency_type_from");
 
         let currency_val_to = document.getElementById("currency_val_to");
         let currency_type_to = document.getElementById("currency_type_to");
@@ -76,40 +137,75 @@
             request.onload = function() {
                 var response = request.response;
                 console.log(response);
-                currency_val_to.value = Math.round(currency_val_from*response.info.rate*100)/100;
+                currency_val_to.value = Math.round(currency_val_from.value*response.info.rate*100)/100;
             }
         document.getElementById('currency_val_from').addEventListener('change', function() {
-            currency_val_from = this.value;
-
-            requestURL = "https://api.exchangerate.host/convert?from=" + currency_type_from + "&to=" + currency_type_to.value; 
+            currency_val_from = this;
+            currency_type_from = document.getElementById("currency_type_from");
+            currency_type_to = document.getElementById("currency_type_to");
+            
+            requestURL = "https://api.exchangerate.host/convert?from=" + currency_type_from.value + "&to=" + currency_type_to.value; 
             request = new XMLHttpRequest(); 
             request.open('GET', requestURL);
             request.responseType = 'json';
             request.send();
 
             request.onload = function() {
-            let response = request.response;
-            const rate = response.info.rate;
-            currency_val_to.value = Math.round(currency_val_from*response.info.rate*100)/100;
+                let response = request.response;
+                currency_val_to.value = Math.round(currency_val_from.value*response.info.rate*100)/100;
             }
         });
         document.getElementById('currency_type_from').addEventListener('change', function() {
-            currency_type_from = this.value;
-            requestURL = "https://api.exchangerate.host/convert?from=" + currency_type_from + "&to=" + currency_type_to.value; 
+            currency_val_from = document.getElementById("currency_val_from");
+            currency_type_from = this;
+            currency_type_to = document.getElementById("currency_type_to");
+            
+            requestURL = "https://api.exchangerate.host/convert?from=" + currency_type_from.value + "&to=" + currency_type_to.value; 
             request = new XMLHttpRequest(); 
             request.open('GET', requestURL);
             request.responseType = 'json';
             request.send();
 
             request.onload = function() {
-            let response = request.response;
-            const rate = response.info.rate;
-            currency_val_to.value = Math.round(currency_val_from*response.info.rate*100)/100;
+                let response = request.response;
+                currency_val_to.value = Math.round(currency_val_from.value*response.info.rate*100)/100;
             }
         });
 
+        document.getElementById('currency_type_to').addEventListener('change', function() {
+            currency_val_from = document.getElementById("currency_val_from");
+            currency_type_from = document.getElementById("currency_type_from");;
+            currency_type_to = this;
+            
+            requestURL = "https://api.exchangerate.host/convert?from=" + currency_type_from.value + "&to=" + currency_type_to.value; 
+            request = new XMLHttpRequest(); 
+            request.open('GET', requestURL);
+            request.responseType = 'json';
+            request.send();
 
-        // console.log(val);
+            request.onload = function() {
+                let response = request.response;
+                currency_val_to.value = Math.round(currency_val_from.value*response.info.rate*100)/100;
+            }
+        });
+
+        document.getElementById('currency_val_to').addEventListener('change', function() {
+            currency_val_from = document.getElementById("currency_val_from");
+            currency_type_from = document.getElementById("currency_type_from");
+            currency_type_to = document.getElementById("currency_type_to");
+            currency_val_to = this;
+            
+            requestURL = "https://api.exchangerate.host/convert?from=" + currency_type_to.value + "&to=" + currency_type_from.value; 
+            request = new XMLHttpRequest(); 
+            request.open('GET', requestURL);
+            request.responseType = 'json';
+            request.send();
+
+            request.onload = function() {
+                let response = request.response;
+                currency_val_from.value = Math.round(currency_val_to.value*response.info.rate*100)/100;
+            }
+        });
     </script>
 {% endblock %}
 
