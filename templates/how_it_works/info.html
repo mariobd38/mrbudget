@@ -1,11 +1,38 @@
 {% extends "base.html" %}
-{% block title %}Info{% endblock%}
-{% block content %}
-    <div class="container-fluid d-flex justify-content-center">
-        <h1>Why Mr Budget?</h1>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Info</title>
+    {% block stylesheet %}
+    <link rel="stylesheet" href="static/info.css">
+    {% endblock %}
+<body>
+    {% block content %}
+        <div class="container-fluid pt-3">
+            <div class="text-center ">
+                <h1 class="top-header">What is Mr Budget?</h1>
+                <p class="pt-1 top-description m-auto">Mr Budget serves as your own personal finance application! Discover how you can balance out your spending, balances, and budgets all in one place.</p>
+            </div>
 
-{% endblock %}
+            <div class="container-fluid d-flex justify-content-center pt-5">
+                <div class="d-flex align-items-center">
+                  <div class="d-flex flex-column side-text m-auto">
+                    <h1 class="text-center home-heading">This is the story of Peter</h1>
+                    <p class="text-center subheading">As a family man, Peter a lot to keep track of and it's important to have everything in one single place. With Mr Budget, he's easily able to manage his finances and spend plenty of time with the family.</p>
+                    <form class="my-3 mx-auto" action="{{url_for('register')}}">
+                      <button class=" btn btn-md btn-success btn-rounded sign-up">Sign up for free</button>
+                    </form>                
+                  </div>
+                </div>
+                <img src="/static/images/family.png" class="illustration d-none d-md-block" alt="">
 
-{% block footer %}
-{% endblock %}
+              </div>
+
+        </div>
+
+    {% endblock %}
+
+    {% block footer %}
+    {% endblock %}
+</body>
+</html>

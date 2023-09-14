@@ -1,24 +1,20 @@
 {% extends "base.html" %}
-{% block title %}Info{% endblock%}
-{% block stylesheet %}
-    <!-- <link
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-  rel="stylesheet"
-/>
-<link
-  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-  rel="stylesheet"
-/> -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-flags.min.css">
-<link rel="stylesheet" href="static/currency_converter.css">
-<link rel="stylesheet" href="static/base.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Currency Converter</title>
+    {% block stylesheet %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler-flags.min.css">
+    <link rel="stylesheet" href="static/currency_converter.css">
+    <link rel="stylesheet" href="static/base.css">
 
-<!-- <script type="text/javascript" src="js_scripts/currency_converter.js"></script> -->
-{% endblock %}
+<!-- <script type="text/javascript" src="/templates/resources/js_scripts/currency_js.js"></script> -->
+    {% endblock %}
+<body>
 {% block content %}
     <div class="container-fluid pt-3">
         <div class="text-center m-auto">
-            <h1 class="header-text">Currency Converter</h1>
+            <h1>Currency Converter</h1>
             <p class="pt-2 description">Over 20 different currencies to choose from, with a real time exchange rate</p>
             <div>
                 <span class="flag flag-sm flag-country-ar"></span>
@@ -117,12 +113,34 @@
                     </div>
                 </div>
         </div>
+
+
+
+
+        <!-- <div class=" m-0">
+            <canvas id="myChart"></canvas>
+          </div> -->
+        <div class="chart-container m-auto " style="position: static; width:80vw;">
+            <div class="d-flex justify-content-center" style="position: static; height:40vh; width:80vw; padding:0; margin:0;">
+                <canvas id="myChart" class="text-center"></canvas>
+
+            </div>
+
+            <div class="pt-4 d-flex justify-content-around ">
+                <button class="btn btn-success " style="text-transform: capitalize;">Last 30 days</button>
+                <button class="btn btn-success " style="text-transform: capitalize;">Last 15 days</button>
+                <button class="btn btn-success " style="text-transform: capitalize;">Last 7 days</button>
+            </div>
+        </div>
+
+
     </div>
-        
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-
-        // let val = document.getElementById("currency_val_from").value;
         let currency_val_from = document.getElementById("currency_val_from");
         let currency_type_from = document.getElementById("currency_type_from");
 
@@ -136,7 +154,7 @@
             request.send();
             request.onload = function() {
                 var response = request.response;
-                console.log(response);
+                // console.log(response);
                 currency_val_to.value = Math.round(currency_val_from.value*response.info.rate*100)/100;
             }
         document.getElementById('currency_val_from').addEventListener('change', function() {
@@ -206,8 +224,96 @@
                 currency_val_from.value = Math.round(currency_val_to.value*response.info.rate*100)/100;
             }
         });
-    </script>
-{% endblock %}
 
-{% block footer %}
-{% endblock %}
+
+        /* TODO: change graph when the top currency is modified */
+
+
+        let numsArray = [];
+        let ratesArray = [];
+        let daysArray = [];
+        const ctx = document.getElementById('myChart');
+
+
+        let today = new Date();
+
+        const daysBefore = 30;
+        let priorDate = new Date(new Date().setDate(today.getDate() - daysBefore));
+        let start_date_dd = String(priorDate.getDate()).padStart(2, '0');
+        let start_date_mm = String(priorDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let start_date_yyyy = priorDate.getFullYear();
+        let start_date = start_date_yyyy + "-" + start_date_mm + "-" + start_date_dd;
+
+        let end_date_dd = String(today.getDate()).padStart(2, '0');
+        let end_date_mm = String(today.getMonth() + 1).padStart(2, '0');
+        let end_date_yyyy = today.getFullYear();
+        let end_date = end_date_yyyy + "-" + end_date_mm + "-" + end_date_dd;
+
+
+        for(let i = daysBefore-1; i >= 0; i--) {
+                let date = new Date(new Date().setDate(today.getDate() - i));
+                let dd = String(date.getDate()).padStart(2, '0');
+                let mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+                let yyyy = date.getFullYear();
+                let full_date = yyyy + "-" + mm + "-" + dd;
+                daysArray.push(full_date)
+        }
+        let ratesFunction = function() {
+
+            let graphRequest = "https://api.exchangerate.host/timeseries?start_date=" + start_date + "&end_date=" + end_date; 
+            let request1 = new XMLHttpRequest(); 
+            request1.open('GET', requestURL);
+            request1.responseType = 'json';
+            request1.send();
+            console.log(graphRequest);
+            graphRequest.onload = function() {
+                var response1 = request1.response;
+                console.log("hello world");
+                console.log(response1);
+                console.log(response1.rates['2023-08-12']);
+                console.log(response1.rates['2023-08-12']['AED'])
+            
+
+                for(let j = 0; j < daysBefore;j++) {
+                    var response1 = graphRequest.response;
+                    console.log(response1.rates);
+                    ratesArray.push(response1.rates[daysArray[j]]['USD']);
+                }
+            }
+
+            
+            return ratesArray;
+        }
+
+
+        window.onload = function() {
+            // let ratesLine = ratesFunction();
+            // console.log(ratesLine);
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: daysArray,
+                    datasets: [{
+                    label: 'Rate to sell 1 USD',
+                    data: ratesArray,
+                    borderWidth:  1
+                    }]
+                },
+                options: {
+                    scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                    }
+                }
+        });
+        }        
+
+    </script>
+    {% endblock %}
+
+    {% block footer %}
+    {% endblock %}
+    
+</body>
+</html>

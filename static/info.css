@@ -1,0 +1,35 @@
+.top-header {
+    color: black;
+    /* font-weight: 400; */
+}
+.illustration {
+    max-width: 50%;
+}
+.nav-link, .subheading {
+    font-size: 1.1em;
+}
+body {
+    background-color: rgb(241,254,253);
+}
+.subheading {
+    font-family: 'Nunito Sans';
+}
+.side-text {
+    width: 80%;
+    text-align: center;
+}
+.sign-up {
+    /* width: 39%; */
+    background-color: #3c8c85;
+}
+.home-heading {
+    font-family: 'Roboto';
+    font-weight: 700;
+}
+.top-description {
+    text-align: center;
+    padding:0;
+    width: 80%;
+    font-size: 17px;
+    font-family: 'Nunito Sans';
+}
