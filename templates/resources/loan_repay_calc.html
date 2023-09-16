@@ -1,11 +1,73 @@
 {% extends "base.html" %}
-{% block title %}Info{% endblock%}
-{% block content %}
-    <div class="container-fluid d-flex justify-content-center">
-        <h1>Loan Repayment Calculator</h1>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Info</title>
+    {% block stylesheet %}
+    <link rel="stylesheet" href="static/loan_repay_calc.css">
+    {% endblock %}
+<body>
+    {% block content %}
+        <div class="container-fluid pt-3">
+            <div class="text-center ">
+                <h1 class="top-header">Loan Repayment Calculator</h1>
+                <p class="pt-1 top-description">Thinking about borrowing money and are curious to see what your payments would look like before applying? Whether it's student, auto, credit card, or home loan, we've got you covered. This loan calculator will help you determine your monthly payments for different types of loans. 
+                    <br><br> Once you enter your loan amount, the loan term, and interest rate, select <b>Calculate</b>.</p>
+            </div>
 
-{% endblock %}
+            <div class="pt-5">
+                <div class="d-flex justify-content-around calculation-sec">
+                    <form>
+                        <div class="loan-inputs w-40">
+                            <div>
+                                <label for="loan_amount">Enter loan amount</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend side-symbol">
+                                    <span class="input-group-text">$</span>
+                                    </div>
+                                    <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                </div>
+                            </div>
 
-{% block footer %}
-{% endblock %}
+                            <label for="loan_term">Enter loan term in years</label>
+                            <div class="input-group mb-3 w-40">
+                                <div class="input-group-prepend">
+                                </div>
+                                <input type="number" class="form-control" aria-label="Loan Term">
+                            </div>
+
+                            <label for="loan_term">Enter interest rate</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" aria-label="Interest rate">
+                                <div class="input-group-append side-symbol">
+                                    <span class="input-group-text">%</span>
+                                    <!-- <button class="btn btn-outline-secondary" type="button">Button</button>
+                                    <button class="btn btn-outline-secondary" type="button">Button</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div>
+                        <div class="min-payment-div">
+                            <h4 class="payment-text text-center">Minimum monthly payment</h2>
+                                <p class="text-center payment">$<span class="payment-value">0</span></p>
+                        </div>
+                        <div class="total-amount-div">
+                            <h4 class="payment-text text-center">Total Amount Paid</h2>
+                                <p class="text-center payment">$<span class="payment-value">0</span></p>
+                        </div>
+                        <div class="total-amount-div">
+                            <h4 class="payment-text text-center">Total Interest Paid</h2>
+                                <p class="text-center payment">$<span class="payment-value">0</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
+
+    {% block footer %}
+    {% endblock %}
+</body>
+</html>

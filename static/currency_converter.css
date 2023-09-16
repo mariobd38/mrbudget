@@ -66,3 +66,6 @@
 .description {
     font-family: 'Nunito Sans';
 }
+.flag {
+    position: static;
+}
