@@ -17,15 +17,15 @@
 
             <div class="pt-5">
                 <div class="d-flex justify-content-around calculation-sec">
-                    <form>
-                        <div class="loan-inputs w-40">
+                    <div class="calculation-input">
+                        <div class="loan-inputs">
                             <div>
                                 <label for="loan_amount">Enter loan amount</label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend side-symbol">
                                     <span class="input-group-text">$</span>
                                     </div>
-                                    <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                    <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" id="loan_amount_value">
                                 </div>
                             </div>
 
@@ -33,12 +33,12 @@
                             <div class="input-group mb-3 w-40">
                                 <div class="input-group-prepend">
                                 </div>
-                                <input type="number" class="form-control" aria-label="Loan Term">
+                                <input type="number" class="form-control" aria-label="Loan Term" id="loan_term_value">
                             </div>
 
                             <label for="loan_term">Enter interest rate</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" aria-label="Interest rate">
+                                <input type="number" class="form-control" aria-label="Interest rate" id="interest_rate_value">
                                 <div class="input-group-append side-symbol">
                                     <span class="input-group-text">%</span>
                                     <!-- <button class="btn btn-outline-secondary" type="button">Button</button>
@@ -46,25 +46,128 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
-                    <div>
+                        <div class=" ps-4">
+                            <button class="btn submit btn-success text-center m-auto" id="submit-info">Submit</button>
+
+                        </div>
+                    </div>
+                    <div class="calculation-output">
                         <div class="min-payment-div">
                             <h4 class="payment-text text-center">Minimum monthly payment</h2>
-                                <p class="text-center payment">$<span class="payment-value">0</span></p>
+                                <p class="text-center payment">$<span class="payment-value min-mon-payment">0</span></p>
                         </div>
                         <div class="total-amount-div">
                             <h4 class="payment-text text-center">Total Amount Paid</h2>
-                                <p class="text-center payment">$<span class="payment-value">0</span></p>
+                                <p class="text-center payment">$<span class="payment-value tot-amt-paid">0</span></p>
                         </div>
                         <div class="total-amount-div">
                             <h4 class="payment-text text-center">Total Interest Paid</h2>
-                                <p class="text-center payment">$<span class="payment-value">0</span></p>
+                                <p class="text-center payment">$<span class="payment-value tot-int-paid">0</span></p>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
+            <div class="pt-4">
+                <p class="m-auto text-center">
+                    <button class="btn btn-success w-75 m-auto amortization-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                      See amortization schedule
+                    </button>
+                  </p>
+                  <div class="collapse w-75 m-auto text-center" id="collapseExample">
+                    <div class="card card-body" style="overflow-x:auto;">
+                        Data not available. Please enter a loan amount, loan term, and interest rate first.
+                    </div>
+                  </div>
+            </div>
         </div>
 
+        <script>
+            document.getElementById('submit-info').addEventListener('click', function() {
+            let loan_amount_value = document.querySelector("#loan_amount_value").value;
+            let loan_term_value = document.querySelector("#loan_term_value").value;
+            let interest_rate_value = document.querySelector("#interest_rate_value").value;
+            console.log("submit!!!")
+            console.log(loan_amount_value + " " + loan_term_value + " " + interest_rate_value);
+
+            let totalYears = loan_term_value;
+            let interestRate = interest_rate_value/100;
+            let totalMonths = loan_term_value*12;
+            let currBalance = loan_amount_value;
+            let principalPaid = 0;
+            let currInterest = Math.round((currBalance * (interestRate/12))*100) / 100;
+            let monthlyPayment = 0;
+            let totalInterest = 0;
+            let denom = 1-(Math.pow(1+(interestRate/12),-12*totalYears));
+            monthlyPayment = Math.round((currInterest / denom) * 100) / 100;
+            let newYear = false;
+            let yearText = "";
+            const name = "Coding Beauty";
+            let currYear = 0;
+            console.log(name);
+
+            let tableColumns = "";
+            for(let i = 0; i <totalMonths;i++) {
+                if ((i + 1) % 12 == 0) {
+                    newYear = true;
+                    currYear++;
+                    yearText = "Year " + currYear;
+                } else {
+                    newYear = false;
+                    yearText = "";
+                }
+                currBalance -= principalPaid;
+                currBalance = Math.round(currBalance * 100) / 100;
+                currInterest = Math.round(currBalance * (interestRate/12) * 100) / 100;
+                principalPaid = Math.round((monthlyPayment - currInterest) * 100) / 100;
+                totalInterest = Math.round((totalInterest + currInterest) * 100) / 100;
+
+                tableColumns += "<tr>" + 
+                    "<td class=\"text-center\">" + yearText + "</td>" + 
+                    "<td class=\"text-center\">$" + currBalance + "</td>" + 
+                    "<td class=\"text-center\">$" + currInterest + "</td>" + 
+                    "<td class=\"text-center\">$" + principalPaid + "</td>" + 
+                    "<td class=\"text-center\">$" + totalInterest + "</td>" + 
+                    "<td class=\"text-center\">$" + monthlyPayment + "</td>";
+            }
+
+
+
+            let card = document.querySelector(".card");
+            card.innerHTML = "<table>" + 
+                "<tr>" + 
+                    "<th class=\"text-center\"> Years </th>" + 
+                    "<th class=\"text-center\"> Balance</th>" + 
+                    "<th class=\"text-center\"> Interest</th>" + 
+                    "<th class=\"text-center\"> Principal paid</th>" + 
+                    "<th class=\"text-center\"> Total interest paid</th>" + 
+                    "<th class=\"text-center\"> Monthly payment</th>" + 
+                "</tr>" + tableColumns + 
+                "</table>";
+
+            
+            
+                let min_month_payment = document.querySelector(".min-mon-payment");
+                min_month_payment.textContent = Math.round(monthlyPayment);
+
+                let tot_amt_paid = document.querySelector(".tot-amt-paid");
+                tot_amt_paid.textContent = parseInt(loan_amount_value) + parseInt(totalInterest);
+                console.log(parseInt(loan_amount_value) + parseInt(totalInterest));
+
+                let tot_int_paid = document.querySelector(".tot-int-paid");
+                tot_int_paid.textContent = Math.round(totalInterest, 2);
+                // min_mon_payment.innerContext = Math.round(monthlyPayment);
+            // card.value = "Hello world";
+        });
+
+            var collapseElementList = [].slice.call(document.querySelectorAll('.collapse'))
+            var collapseList = collapseElementList.map(function (collapseEl) {
+                return new bootstrap.Collapse(collapseEl)
+            });
+
+        </script>
     {% endblock %}
 
     {% block footer %}
